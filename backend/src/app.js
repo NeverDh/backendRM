@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const router = require("./routes/router");
+const login = require("./routes/router.login");
 const app = express();
   
 app.use(cors());
@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use(router);
+app.use("/login", login);
 
 
 module.exports = app;
