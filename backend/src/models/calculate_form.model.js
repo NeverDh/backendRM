@@ -5,11 +5,10 @@ const connection = require("./connection.model");
 const calculateForm = async (req) => {
 	try{
 		const dependentResult = [];
-		const {nomefantasia, idade, dependentes, seguro} = req.body
-		console.log(nomefantasia, idade, dependentes, seguro)
+		const {plano, idade, dependentes, seguro} = req.body
 		const holderResult = await connection.execute(`SELECT VALOR
 														FROM zmdtabelapreco
-														WHERE NOMEFANTASIA = '${nomefantasia}'
+														WHERE NOMEFANTASIA = '${plano}'
 														AND '${idade}' BETWEEN IDADEINICIAL AND IDADEFINAL
 														AND TIPO = 'T';`);
 		
@@ -19,7 +18,7 @@ const calculateForm = async (req) => {
 				const result = await connection.execute(`
 					SELECT VALOR
 					FROM zmdtabelapreco
-					WHERE NOMEFANTASIA = '${nomefantasia}'
+					WHERE NOMEFANTASIA = '${plano}'
 					AND '${idadeDependente}' BETWEEN IDADEINICIAL AND IDADEFINAL
 					AND TIPO = 'D';
 				`);

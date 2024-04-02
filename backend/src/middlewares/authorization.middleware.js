@@ -12,7 +12,7 @@ const authorization = async (req, res, next) => {
     if (authorization === false) {
         return res.status(400).json({ message: "Não Autorizado!" });
     }
-
+    req.body.filtro = username;
     authorization.length > 0 ? next() : res.status(400).json({ message: "Sem dados!" });
 };
 

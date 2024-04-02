@@ -1,15 +1,30 @@
-const validateCalcForm = async (req, res, next) => {
+const validateSaveForm = async (req, res, next) => {
 	const { body, user } = req;
 	
 	if (!req.get("Authorization")){
 		return res.status(401).json({message: "Não Autorizado!"});
 	}
+    
+	if(body.nome === undefined) {
+		return res.status(400).json({message: "O campo nome é obrigatório!"});
+	}
+	if(body.nome === "") {
+		return res.status(400).json({message: "O campo nome não pode ser vazio!"});
+	}
+
+    if(body.cidade === undefined) {
+		return res.status(400).json({message: "O campo cidade é obrigatório!"});
+	}
+	if(body.cidade === "") {
+		return res.status(400).json({message: "O campo cidade não pode ser vazio!"});
+	}
+    
 
 	if(body.plano === undefined) {
-		return res.status(400).json({message: "O campo plano é obrigatório!"});
+		return res.status(400).json({message: "O campo nomefantasia é obrigatório!"});
 	}
 	if(body.plano === "") {
-		return res.status(400).json({message: "O campo plano não pode ser vazio!"});
+		return res.status(400).json({message: "O campo nomefantasia não pode ser vazio!"});
 	}
 
 	if(body.idade === undefined) {
@@ -39,5 +54,5 @@ const validateCalcForm = async (req, res, next) => {
 };
 
 module.exports = {
-	validateCalcForm
+	validateSaveForm
 }
