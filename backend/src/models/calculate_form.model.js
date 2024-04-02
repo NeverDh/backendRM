@@ -14,25 +14,28 @@ const calculateForm = async (req) => {
 		
 		if (dependentes.length > 0) {
 			// Usando Promise.all para aguardar todas as consultas serem concluídas
-			await Promise.all(dependentes.map(async (idadeDependente) => {
+			await Promise.all(dependentes.map(async (dependente) => {
 				const result = await connection.execute(`
 					SELECT VALOR
 					FROM zmdtabelapreco
 					WHERE NOMEFANTASIA = '${plano}'
-					AND '${idadeDependente}' BETWEEN IDADEINICIAL AND IDADEFINAL
+					AND '${dependente.idade}' BETWEEN IDADEINICIAL AND IDADEFINAL
 					AND TIPO = 'D';
 				`);
-				dependentResult.push(result[0][0].VALOR);
+				console.log(dependente.idade < 80 ? dependente.seguro : 0)
+				//console.log((dependente.idade < 80 ? dependente.seguro : 0))
+				dependentResult.push(result[0][0].VALOR + (dependente.idade < 80 ? dependente.seguro : 0));
 			}));
 		}
 
 		const dependentSum = dependentResult.reduce((acumulador, elemento) => acumulador + elemento, 0);
 
 		if(seguro > 0){
-			console.log(holderResult[0][0].VALOR + dependentSum + seguro)
-			return holderResult[0][0].VALOR + dependentSum + seguro
+			const somarSeguro = idade < 80 ? seguro : 0
+			//console.log(holderResult[0][0].VALOR + dependentSum + somarSeguro)
+			return holderResult[0][0].VALOR + dependentSum + somarSeguro
 		} else{
-			console.log(holderResult[0][0].VALOR + dependentSum)
+			//console.log(holderResult[0][0].VALOR + dependentSum)
 			return holderResult[0][0].VALOR + dependentSum;
 		} 
 	

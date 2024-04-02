@@ -26,6 +26,13 @@ const validateSaveForm = async (req, res, next) => {
 		return res.status(400).json({message: "O campo sexo não pode ser vazio!"});
 	}
 
+	if(body.celular === undefined) {
+		return res.status(400).json({message: "O campo celular é obrigatório!"});
+	}
+	if(body.celular === "") {
+		return res.status(400).json({message: "O campo celular não pode ser vazio!"});
+	}
+
     if(body.cidade === undefined) {
 		return res.status(400).json({message: "O campo cidade é obrigatório!"});
 	}
