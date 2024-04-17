@@ -4,11 +4,11 @@ const calcForm = require('./calculate_form.model')
 
 const saveForm = async (req) => {
 	try{
-		const {nome, cidade, plano, idade, seguro, dependentes, sexo, temPlano, celular, origem, filtro} = req.body
+		const {nome, cidade, plano, idade, seguro, dependentes, sexo, temPlano, celular, origem, desejaClubeBeneficios, filtro} = req.body
 
         const valor = await calcForm.calculateForm(req)
-		const result = await connection.execute(`INSERT INTO formularios_salvos (nome, cidade, tPlano, idade, seguro, quantidade_dependentes, criadoEm, valor, filtro, sexo, plano, celular, origem) 
-        VALUES ('${nome}', '${cidade}', '${temPlano}', ${idade}, '${seguro}', '${dependentes.length}', NOW(), '${valor}', '${filtro}', '${sexo}', '${plano}', '${celular}', '${origem}');`);
+		const result = await connection.execute(`INSERT INTO formularios_salvos (nome, cidade, tPlano, idade, seguro, quantidade_dependentes, criadoEm, valor, filtro, sexo, plano, celular, origem, desejaClubeBeneficios) 
+        VALUES ('${nome}', '${cidade}', '${temPlano}', ${idade}, '${seguro}', '${dependentes.length}', NOW(), '${valor}', '${filtro}', '${sexo}', '${plano}', '${celular}', '${origem}', '${desejaClubeBeneficios}');`);
 		return result[0].insertId
 	
 
