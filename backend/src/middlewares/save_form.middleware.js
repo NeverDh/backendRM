@@ -20,13 +20,6 @@ const validateSaveForm = async (req, res, next) => {
 		return res.status(400).json({message: "O campo origem não pode ser vazio!"});
 	}
 
-	if(body.temPlano === undefined) {
-		return res.status(400).json({message: "O campo temPlano é obrigatório!"});
-	}
-	if(body.temPlano === "") {
-		return res.status(400).json({message: "O campo temPlano não pode ser vazio!"});
-	}
-
 	if(body.sexo === undefined) {
 		return res.status(400).json({message: "O campo sexo é obrigatório!"});
 	}
