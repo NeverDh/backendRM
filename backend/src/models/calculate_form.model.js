@@ -34,9 +34,9 @@ const calculateForm = async (req) => {
 		const dependentSum = dependentResult.reduce((acumulador, elemento) => acumulador + elemento, 0);
 		console.log(dependentSum)
 
-		if(seguro > 0){
-			var somarSeguro = idade < 80 ? seguro : 0
-			//console.log(holderResult[0][0].VALOR + dependentSum + somarSeguro)
+		var somarSeguro = 0;
+		if (seguro > 0) {
+			somarSeguro = idade < 80? seguro: 0
 		}
 		
 		if(desejaClubeBeneficios){
